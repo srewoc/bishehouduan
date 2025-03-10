@@ -1,0 +1,10 @@
+com\bydbishe\BishehouduanApplication.class
+com\bydbishe\entity\Admin$AdminBuilder.class
+com\bydbishe\common\Result.class
+com\bydbishe\controller\LoginController.class
+com\bydbishe\entity\Student.class
+com\bydbishe\entity\Student$StudentBuilder.class
+com\bydbishe\service\LoginService.class
+com\bydbishe\entity\Admin.class
+com\bydbishe\service\impl\LoginServiceImpl.class
+com\bydbishe\dto\LoginDTO.class

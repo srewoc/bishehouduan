@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bydbishe.mapper.ShuaTiMapper">
+    <select id="getChapter" resultType="java.lang.String">
+        SELECT jvalue FROM json where jkey = 'catalogue'
+    </select>
+    <select id="getByKlgInXuanzeti" resultType="com.bydbishe.vo.ChapterVo" parameterType="java.lang.String">
+        select uid,null as answered from xuanzeti
+        where knowledge like concat('%',#{id},'%')
+        order by uid
+    </select>
+
+    <select id="getProblemByUid" resultType="com.bydbishe.entity.SingleChoice" parameterType="java.lang.Integer">
+        select id, text, difficulty from xuanzeti where uid = #{uid}
+    </select>
+</mapper>

@@ -1,0 +1,908 @@
+{
+  "data": [
+    {
+      "label": "第一章 概述",
+      "value": "第1章",
+      "children": [
+        {
+          "label": "1.1 计算机网络在信息时代中的作用",
+          "value": "1.1",
+          "children": []
+        },
+        {
+          "label": "1.2 互联网概述",
+          "value": "1.2",
+          "children": [
+            {
+              "label": "1.2.1 网络的网络 ",
+              "value": "1.2.1",
+              "children": []
+            },
+            {
+              "label": "1.2.2 互联网基础结构发展的三个阶段 ",
+              "value": "1.2.2",
+              "children": []
+            },
+            {
+              "label": "1.2.3 互联网的标准化工作 ",
+              "value": "1.2.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "1.3 互联网的组成",
+          "value": "1.3",
+          "children": [
+            {
+              "label": "1.3.1 互联网的边缘部分 ",
+              "value": "1.3.1",
+              "children": []
+            },
+            {
+              "label": "1.3.2 互联网的核心部分 ",
+              "value": "1.3.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "1.4 计算机网络在我国的发展",
+          "value": "1.4",
+          "children": []
+        },
+        {
+          "label": "1.5 计算机网络的类别",
+          "value": "1.5",
+          "children": [
+            {
+              "label": "1.5.1 计算机网络的定义 ",
+              "value": "1.5.1",
+              "children": []
+            },
+            {
+              "label": "1.5.2 几种不同类别的计算机网络 ",
+              "value": "1.5.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "1.6 计算机网络的性能",
+          "value": "1.6",
+          "children": [
+            {
+              "label": "1.6.1 计算机网络的性能指标 ",
+              "value": "1.6.1",
+              "children": []
+            },
+            {
+              "label": "1.6.2 计算机网络的非性能特征 ",
+              "value": "1.6.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "1.7 计算机网络体系结构",
+          "value": "1.7",
+          "children": [
+            {
+              "label": "1.7.1 计算机网络体系结构的形成 ",
+              "value": "1.7.1",
+              "children": []
+            },
+            {
+              "label": "1.7.2 协议与划分层次 ",
+              "value": "1.7.2",
+              "children": []
+            },
+            {
+              "label": "1.7.3 具有五层协议的体系结构 ",
+              "value": "1.7.3",
+              "children": []
+            },
+            {
+              "label": "1.7.4 实体、协议、服务和服务访问点 ",
+              "value": "1.7.4",
+              "children": []
+            },
+            {
+              "label": "1.7.5 TCP/IP的体系结构 ",
+              "value": "1.7.5",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "第二章 物理层",
+      "value": "第2章",
+      "children": [
+        {
+          "label": "2.1 物理层的基本概念",
+          "value": "2.1",
+          "children": []
+        },
+        {
+          "label": "2.2 数据通信的基础知识",
+          "value": "2.2",
+          "children": [
+            {
+              "label": "2.2.1 数据通信系统的模型 ",
+              "value": "2.2.1",
+              "children": []
+            },
+            {
+              "label": "2.2.2 有关信道的几个基本概念 ",
+              "value": "2.2.2",
+              "children": []
+            },
+            {
+              "label": "2.2.3 信道的极限容量 ",
+              "value": "2.2.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "2.3 物理层下面的传输媒体",
+          "value": "2.3",
+          "children": [
+            {
+              "label": "2.3.1 导引型传输媒体 ",
+              "value": "2.3.1",
+              "children": []
+            },
+            {
+              "label": "2.3.2 非导引型传输媒体 ",
+              "value": "2.3.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "2.4 信道复用技术",
+          "value": "2.4",
+          "children": [
+            {
+              "label": "2.4.1 频分复用、时分复用和统计时分复用 ",
+              "value": "2.4.1",
+              "children": []
+            },
+            {
+              "label": "2.4.2 波分复用 ",
+              "value": "2.4.2",
+              "children": []
+            },
+            {
+              "label": "2.4.3 码分复用 ",
+              "value": "2.4.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "2.5 数字传输系统",
+          "value": "2.5",
+          "children": []
+        },
+        {
+          "label": "2.6 宽带接入技术",
+          "value": "2.6",
+          "children": [
+            {
+              "label": "2.6.1 ADSL技术 ",
+              "value": "2.6.1",
+              "children": []
+            },
+            {
+              "label": "2.6.2 光纤同轴混合网（HFC网） ",
+              "value": "2.6.2",
+              "children": []
+            },
+            {
+              "label": "2.6.3 FTTx技术 ",
+              "value": "2.6.3",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "第三章 数据链路层",
+      "value": "第3章",
+      "children": [
+        {
+          "label": "3.1 数据链路层的几个共同问题",
+          "value": "3.1",
+          "children": [
+            {
+              "label": "3.1.1 数据链路和帧 ",
+              "value": "3.1.1",
+              "children": []
+            },
+            {
+              "label": "3.1.2 三个基本问题 ",
+              "value": "3.1.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "3.2 点对点协议PPP",
+          "value": "3.2",
+          "children": [
+            {
+              "label": "3.2.1 PPP协议的特点 ",
+              "value": "3.2.1",
+              "children": []
+            },
+            {
+              "label": "3.2.2 PPP协议的格式 ",
+              "value": "3.2.2",
+              "children": []
+            },
+            {
+              "label": "3.2.3 PPP协议的工作状态 ",
+              "value": "3.2.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "3.3 使用广播信道的数据链路层",
+          "value": "3.3",
+          "children": [
+            {
+              "label": "3.3.1 局域网的数据链路层 ",
+              "value": "3.3.1",
+              "children": []
+            },
+            {
+              "label": "3.3.2 CSMA/CD协议 ",
+              "value": "3.3.2",
+              "children": []
+            },
+            {
+              "label": "3.3.3 使用集线器的星形拓扑 ",
+              "value": "3.3.3",
+              "children": []
+            },
+            {
+              "label": "3.3.4 以太网的信道利用率 ",
+              "value": "3.3.4",
+              "children": []
+            },
+            {
+              "label": "3.3.5 以太网的MAC层 ",
+              "value": "3.3.5",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "3.4 扩展的以太网",
+          "value": "3.4",
+          "children": [
+            {
+              "label": "3.4.1 在物理层扩展以太网 ",
+              "value": "3.4.1",
+              "children": []
+            },
+            {
+              "label": "3.4.2 在数据链路层扩展以太网 ",
+              "value": "3.4.2",
+              "children": []
+            },
+            {
+              "label": "3.4.3 虚拟局域网 ",
+              "value": "3.4.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "3.5 高速以太网",
+          "value": "3.5",
+          "children": [
+            {
+              "label": "3.5.1 100BASE-T以太网 ",
+              "value": "3.5.1",
+              "children": []
+            },
+            {
+              "label": "3.5.2 吉比特以太网 ",
+              "value": "3.5.2",
+              "children": []
+            },
+            {
+              "label": "3.5.3 10吉比特以太网(10GbE)和更快的以太网 ",
+              "value": "3.5.3",
+              "children": []
+            },
+            {
+              "label": "3.5.4 使用以太网进行宽带接入 ",
+              "value": "3.5.4",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "第四章 网络层",
+      "value": "第4章",
+      "children": [
+        {
+          "label": "4.1 网络层的几个重要概念",
+          "value": "4.1",
+          "children": [
+            {
+              "label": "4.1.1 网络层提供的两种服务 ",
+              "value": "4.1.1",
+              "children": []
+            },
+            {
+              "label": "4.1.2 网络层的两个层面 ",
+              "value": "4.1.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.2 网际协议IP",
+          "value": "4.2",
+          "children": [
+            {
+              "label": "4.2.1 虚拟互连网络 ",
+              "value": "4.2.1",
+              "children": []
+            },
+            {
+              "label": "4.2.2 IP地址 ",
+              "value": "4.2.2",
+              "children": []
+            },
+            {
+              "label": "4.2.3 IP地址与MAC地址 ",
+              "value": "4.2.3",
+              "children": []
+            },
+            {
+              "label": "4.2.4 地址解析协议ARP ",
+              "value": "4.2.4",
+              "children": []
+            },
+            {
+              "label": "4.2.5 IP数据报的格式 ",
+              "value": "4.2.5",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.3 IP层转发分组的过程",
+          "value": "4.3",
+          "children": [
+            {
+              "label": "4.3.1 基于终点的转发 ",
+              "value": "4.3.1",
+              "children": []
+            },
+            {
+              "label": "4.3.2 最长前缀匹配 ",
+              "value": "4.3.2",
+              "children": []
+            },
+            {
+              "label": "4.3.3 使用二叉线索查找转发表 ",
+              "value": "4.3.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.4 网际控制报文协议ICMP",
+          "value": "4.4",
+          "children": [
+            {
+              "label": "4.4.1 ICMP报文的种类 ",
+              "value": "4.4.1",
+              "children": []
+            },
+            {
+              "label": "4.4.2 ICMP的应用举例 ",
+              "value": "4.4.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.5 IPV6",
+          "value": "4.5",
+          "children": [
+            {
+              "label": "4.5.1 IPv6的基本首部 ",
+              "value": "4.5.1",
+              "children": []
+            },
+            {
+              "label": "4.5.2 IPv6的地址 ",
+              "value": "4.5.2",
+              "children": []
+            },
+            {
+              "label": "4.5.3 从IPv4向IPv6过渡 ",
+              "value": "4.5.3",
+              "children": []
+            },
+            {
+              "label": "4.5.4 ICMPv6 ",
+              "value": "4.5.4",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.6 互联网的路由选择协议",
+          "value": "4.6",
+          "children": [
+            {
+              "label": "4.6.1 有关路由选择协议的几个基本概念 ",
+              "value": "4.6.1",
+              "children": []
+            },
+            {
+              "label": "4.6.2 内部网关协议RIP1 ",
+              "value": "4.6.2",
+              "children": []
+            },
+            {
+              "label": "4.6.3 内部网关协议OSPF ",
+              "value": "4.6.3",
+              "children": []
+            },
+            {
+              "label": "4.6.4 外部网关协议BGP ",
+              "value": "4.6.4",
+              "children": []
+            },
+            {
+              "label": "4.6.5 路由器的构成 ",
+              "value": "4.6.5",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.7 IP多播",
+          "value": "4.7",
+          "children": [
+            {
+              "label": "4.7.1 IP多播的基本概念 ",
+              "value": "4.7.1",
+              "children": []
+            },
+            {
+              "label": "4.7.2 在局域网上进行硬件多播 ",
+              "value": "4.7.2",
+              "children": []
+            },
+            {
+              "label": "4.7.3 网际组管理协议IGMP和多播路由选择协议 ",
+              "value": "4.7.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.8 虚拟专用网VPN和网络地址转换NAT",
+          "value": "4.8",
+          "children": [
+            {
+              "label": "4.8.1 虚拟专用网VPN ",
+              "value": "4.8.1",
+              "children": []
+            },
+            {
+              "label": "4.8.2 网络地址转换 ",
+              "value": "4.8.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.9 多协议标签交换MPLS",
+          "value": "4.9",
+          "children": [
+            {
+              "label": "4.9.1 MPLS的工作原理 ",
+              "value": "4.9.1",
+              "children": []
+            },
+            {
+              "label": "4.9.2 MPLS首部的位置与格式 ",
+              "value": "4.9.2",
+              "children": []
+            },
+            {
+              "label": "4.9.3 新一代的MPLS ",
+              "value": "4.9.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "4.10 软件定义网络 SDN 简介",
+          "value": "4.10",
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "第五章 运输层",
+      "value": "第5章",
+      "children": [
+        {
+          "label": "5.1 运输层协议概述",
+          "value": "5.1",
+          "children": [
+            {
+              "label": "5.1.1 进程之间的通信 ",
+              "value": "5.1.1",
+              "children": []
+            },
+            {
+              "label": "5.1.2 运输层的两个主要协议 ",
+              "value": "5.1.2",
+              "children": []
+            },
+            {
+              "label": "5.1.3 运输层的端口 ",
+              "value": "5.1.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.2 用户数据报协议UDP",
+          "value": "5.2",
+          "children": [
+            {
+              "label": "5.2.1 UDP概述 ",
+              "value": "5.2.1",
+              "children": []
+            },
+            {
+              "label": "5.2.2 UDP的首部格式 ",
+              "value": "5.2.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.3 传输控制协议TCP概述",
+          "value": "5.3",
+          "children": [
+            {
+              "label": "5.3.1 TCP最主要的特点 ",
+              "value": "5.3.1",
+              "children": []
+            },
+            {
+              "label": "5.3.2 TCP的连接 ",
+              "value": "5.3.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.4 可靠传输的工作原理",
+          "value": "5.4",
+          "children": [
+            {
+              "label": "5.4.1 停止等待协议 ",
+              "value": "5.4.1",
+              "children": []
+            },
+            {
+              "label": "5.4.2 连续ARO协议 ",
+              "value": "5.4.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.5 TCP报文段的首部格式",
+          "value": "5.5",
+          "children": []
+        },
+        {
+          "label": "5.6 TCP可靠传输的实现",
+          "value": "5.6",
+          "children": [
+            {
+              "label": "5.6.1 以字节为单位的滑动窗口 ",
+              "value": "5.6.1",
+              "children": []
+            },
+            {
+              "label": "5.6.2 超时重传时间的选择 ",
+              "value": "5.6.2",
+              "children": []
+            },
+            {
+              "label": "5.6.3 选择确认SACK ",
+              "value": "5.6.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.7 TCP的流量控制",
+          "value": "5.7",
+          "children": [
+            {
+              "label": "5.7.1 利用滑动窗口实现流量控制 ",
+              "value": "5.7.1",
+              "children": []
+            },
+            {
+              "label": "5.7.2 TCP的传输效率 ",
+              "value": "5.7.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.8 TCP的拥塞控制",
+          "value": "5.8",
+          "children": [
+            {
+              "label": "5.8.1 拥塞控制的一般原理 ",
+              "value": "5.8.1",
+              "children": []
+            },
+            {
+              "label": "5.8.2 TCP的拥塞控制方法 ",
+              "value": "5.8.2",
+              "children": []
+            },
+            {
+              "label": "5.8.3 主动队列管理AOM ",
+              "value": "5.8.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "5.9 TCP的运输连接管理",
+          "value": "5.9",
+          "children": [
+            {
+              "label": "5.9.1 TCP的连接建立 ",
+              "value": "5.9.1",
+              "children": []
+            },
+            {
+              "label": "5.9.2 TCP的连接释放 ",
+              "value": "5.9.2",
+              "children": []
+            },
+            {
+              "label": "5.9.3 TCP的有限状态机 ",
+              "value": "5.9.3",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "第六章 应用层",
+      "value": "第6章",
+      "children": [
+        {
+          "label": "6.1 域名系统DNS",
+          "value": "6.1",
+          "children": [
+            {
+              "label": "6.1.1 域名系统概述 ",
+              "value": "6.1.1",
+              "children": []
+            },
+            {
+              "label": "6.1.2 互联网的域名结构 ",
+              "value": "6.1.2",
+              "children": []
+            },
+            {
+              "label": "6.1.3 域名服务器 ",
+              "value": "6.1.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "6.2 文件传送协议",
+          "value": "6.2",
+          "children": [
+            {
+              "label": "6.2.1 FTP概述 ",
+              "value": "6.2.1",
+              "children": []
+            },
+            {
+              "label": "6.2.2 FTP的基本工作原理 ",
+              "value": "6.2.2",
+              "children": []
+            },
+            {
+              "label": "6.2.3 简单文件传送协议TFTP ",
+              "value": "6.2.3",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "6.3 远程终端协议TELNET",
+          "value": "6.3",
+          "children": []
+        },
+        {
+          "label": "6.4 万维网WWW",
+          "value": "6.4",
+          "children": [
+            {
+              "label": "6.4.1 万维网概述 ",
+              "value": "6.4.1",
+              "children": []
+            },
+            {
+              "label": "6.4.2 统一资源定位符URL ",
+              "value": "6.4.2",
+              "children": []
+            },
+            {
+              "label": "6.4.3 超文本传送协议HTTP ",
+              "value": "6.4.3",
+              "children": []
+            },
+            {
+              "label": "6.4.4 万维网的文档 ",
+              "value": "6.4.4",
+              "children": []
+            },
+            {
+              "label": "6.4.5 万维网的信息检索系统 ",
+              "value": "6.4.5",
+              "children": []
+            },
+            {
+              "label": "6.4.6 博客和微博 ",
+              "value": "6.4.6",
+              "children": []
+            },
+            {
+              "label": "6.4.7 社交网站 ",
+              "value": "6.4.7",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "6.5 电子邮件",
+          "value": "6.5",
+          "children": [
+            {
+              "label": "6.5.1 电子邮件概述 ",
+              "value": "6.5.1",
+              "children": []
+            },
+            {
+              "label": "6.5.2 简单邮件传送协议SMTP ",
+              "value": "6.5.2",
+              "children": []
+            },
+            {
+              "label": "6.5.3 电子邮件的信息格式 ",
+              "value": "6.5.3",
+              "children": []
+            },
+            {
+              "label": "6.5.4 邮件读取协议POP3和IMAP ",
+              "value": "6.5.4",
+              "children": []
+            },
+            {
+              "label": "6.5.5 基于万维网的电子邮件 ",
+              "value": "6.5.5",
+              "children": []
+            },
+            {
+              "label": "6.5.6 通用互联网邮件扩充MIME ",
+              "value": "6.5.6",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "6.6 动态主机配置协议DHCP",
+          "value": "6.6",
+          "children": []
+        },
+        {
+          "label": "6.7 简单网络管理协议SNMP",
+          "value": "6.7",
+          "children": [
+            {
+              "label": "6.7.1 网络管理的基本概念 ",
+              "value": "6.7.1",
+              "children": []
+            },
+            {
+              "label": "6.7.2 管理信息结构SMI ",
+              "value": "6.7.2",
+              "children": []
+            },
+            {
+              "label": "6.7.3 管理信息库MIB ",
+              "value": "6.7.3",
+              "children": []
+            },
+            {
+              "label": "6.7.4 SNMP的协议数据单元和报文 ",
+              "value": "6.7.4",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "6.8 应用进程跨越网络的通信",
+          "value": "6.8",
+          "children": [
+            {
+              "label": "6.8.1 系统调用和应用编程接口 ",
+              "value": "6.8.1",
+              "children": []
+            },
+            {
+              "label": "6.8.2 几种常用的系统调用 ",
+              "value": "6.8.2",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "6.9 P2P应用",
+          "value": "6.9",
+          "children": [
+            {
+              "label": "6.9.1 具有集中目录服务器的P2P工作方式 ",
+              "value": "6.9.1",
+              "children": []
+            },
+            {
+              "label": "6.9.2 具有全分布式结构的P2P文件共享程序 ",
+              "value": "6.9.2",
+              "children": []
+            },
+            {
+              "label": "6.9.3 P2P文件分发的分析 ",
+              "value": "6.9.3",
+              "children": []
+            },
+            {
+              "label": "6.9.4 在P2P对等方中搜索对象 ",
+              "value": "6.9.4",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
