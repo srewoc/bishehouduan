@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 public interface LoginService {
 
 
-    Object login(LoginDTO loginDTO);
+    String login(LoginDTO loginDTO);
 }

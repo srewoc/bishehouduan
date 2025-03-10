@@ -1,8 +1,8 @@
 package com.bydbishe.service.impl;
 
+import com.bydbishe.common.JWT;
 import com.bydbishe.dto.LoginDTO;
-import com.bydbishe.entity.Admin;
-import com.bydbishe.entity.Student;
+import com.bydbishe.entity.User;
 import com.bydbishe.exception.BaseException;
 import com.bydbishe.mapper.LoginMapper;
 import com.bydbishe.service.LoginService;
@@ -15,30 +15,18 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginMapper loginMapper;
 
-    public Object login(LoginDTO loginDTO) {
+    public String login(LoginDTO loginDTO) {
 
-        Object object;
-
-        // 1管理员，0学生
-        if (loginDTO.getType() == 1) {
-            Admin admin = loginMapper.getByUsernameInAdmin(loginDTO.getUsername());
-            if (admin == null) {
-                throw new BaseException("账号不存在");
-            }
-            if (!loginDTO.getPassword().equals(admin.getPassword())) {
-                throw new BaseException("密码错误");
-            }
-            object = admin;
-        } else {
-            Student student = loginMapper.getByUsernameInStudent(loginDTO.getUsername());
-            if (student == null) {
-                throw new BaseException("账号不存在");
-            }
-            if (!loginDTO.getPassword().equals(student.getPassword())) {
-                throw new BaseException("密码错误");
-            }
-            object = student;
+        User user = loginMapper.login(loginDTO.getUsername());
+        
+        if (user == null) {
+            throw new BaseException("账号不存在");
         }
-        return object;
+        if (!loginDTO.getPassword().equals(user.getPassword())) {
+            throw new BaseException("密码错误");
+        }
+        
+        return JWT.jwtBuilde(user.getUid());
     }
+    
 }
