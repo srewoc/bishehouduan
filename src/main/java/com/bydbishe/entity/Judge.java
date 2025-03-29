@@ -8,16 +8,17 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class SingleChoice implements Serializable {
+public class Judge implements Serializable {
     private Integer id;
     private String text;
-    private String difficulty;
-    private String answer;
+    private Integer answer;
     private String knowledge;
+    private String difficulty;
     private String picture;
     private Integer uid;
     private Integer type;
+    
 }

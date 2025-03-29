@@ -11,13 +11,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SingleChoice implements Serializable {
+public class GapFilling implements Serializable {
     private Integer id;
-    private String text;
-    private String difficulty;
-    private String answer;
-    private String knowledge;
-    private String picture;
     private Integer uid;
+    private String picture;
+    private String text;
+    private String answer;
+    private String difficulty;
+    private String knowledge;
+    private Integer kong;
     private Integer type;
+    
 }

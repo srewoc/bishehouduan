@@ -11,13 +11,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SingleChoice implements Serializable {
+public class BigProblem implements Serializable {
     private Integer id;
     private String text;
-    private String difficulty;
     private String answer;
     private String knowledge;
+    private String difficulty;
     private String picture;
+    private Integer kong;
     private Integer uid;
     private Integer type;
+    
 }

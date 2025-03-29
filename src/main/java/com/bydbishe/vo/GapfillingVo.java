@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChapterVo implements Serializable {
-    private Integer uid;
-//    private Integer answered;
+public class GapfillingVo implements Serializable {
+    private String title;
+    private String diff;
+    private Integer gapcnt;
+    private String picture;
 }

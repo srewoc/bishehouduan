@@ -10,8 +10,12 @@ import java.util.List;
 @Mapper
 public interface ShuaTiMapper {
     String getChapter();
+    
+    Object getProblemByUid(Integer uid);
 
-    List<ChapterVo> getByKlgInXuanzeti(String id);
+    List<ChapterVo> getByKlg(String id);
 
-    SingleChoice getProblemByUid(Integer uid);
+    Object getPreprob(String chapter, Integer uid);
+
+    Object getNextprob(String chapter, Integer uid);
 }

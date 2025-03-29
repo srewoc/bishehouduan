@@ -1,4 +1,4 @@
-package com.bydbishe.vo;
+package com.bydbishe.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChapterVo implements Serializable {
+public class GapFillingSubmitDTO implements Serializable {
+    private List<String> gaps;
     private Integer uid;
-//    private Integer answered;
 }

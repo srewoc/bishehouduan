@@ -2,16 +2,226 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bydbishe.mapper.ShuaTiMapper">
+    <resultMap id="baseProblemMap" type="java.lang.Object">
+        <id property="uid" column="uid"/>
+        <discriminator javaType="int" column="type">
+            <case value="1" resultMap="singleChoiceMap"/>
+            <case value="3" resultMap="judgeMap"/>
+            <case value="2" resultMap="gapFillingMap"/>
+            <case value="4" resultMap="bigProblemMap"/>
+            <case value="5" resultMap="bigProblemMap"/>
+            <case value="6" resultMap="bigProblemMap"/>
+        </discriminator>
+    </resultMap>
+    <!-- 各题型专用映射 -->
+    <resultMap id="singleChoiceMap" type="SingleChoice" extends="baseProblemMap">
+        <result property="id" column="sc_id"/>
+        <result property="text" column="sc_text"/>
+        <result property="difficulty" column="sc_difficulty"/>
+        <result property="answer" column="sc_answer"/>
+        <result property="knowledge" column="sc_knowledge"/>
+        <result property="picture" column="sc_picture"/>
+    </resultMap>
+    <resultMap id="judgeMap" type="Judge" extends="baseProblemMap">
+        <result property="id" column="jg_id"/>
+        <result property="text" column="jg_text"/>
+        <result property="answer" column="jg_answer"/>
+        <result property="knowledge" column="jg_knowledge"/>
+        <result property="difficulty" column="jg_difficulty"/>
+        <result property="picture" column="jg_picture"/>
+    </resultMap>
+    <resultMap id="gapFillingMap" type="GapFilling" extends="baseProblemMap">
+        <result property="id" column="gf_id"/>
+        <result property="text" column="gf_text"/>
+        <result property="answer" column="gf_answer"/>
+        <result property="difficulty" column="gf_difficulty"/>
+        <result property="knowledge" column="gf_knowledge"/>
+        <result property="picture" column="gf_picture"/>
+        <result property="kong" column="gf_kong"/>
+    </resultMap>
+    <resultMap id="bigProblemMap" type="BigProblem" extends="baseProblemMap">
+        <result property="id" column="bp_id"/>
+        <result property="text" column="bp_text"/>
+        <result property="answer" column="bp_answer"/>
+        <result property="knowledge" column="bp_knowledge"/>
+        <result property="difficulty" column="bp_difficulty"/>
+        <result property="picture" column="bp_picture"/>
+        <result property="kong" column="bp_kong"/>
+    </resultMap>
+
+    <select id="getProblemByUid" resultMap="baseProblemMap">
+        SELECT
+            p.uid,
+            p.type,
+            /* 选择题字段 */
+            x.id AS sc_id,
+            x.text AS sc_text,
+            x.difficulty AS sc_difficulty,
+            x.answer AS sc_answer,
+            x.knowledge AS sc_knowledge,
+            x.picture AS sc_picture,
+            /* 判断题字段 */
+            pd.id AS jg_id,
+            pd.text AS jg_text,
+            pd.answer AS jg_answer,
+            pd.difficulty AS jg_difficulty,
+            pd.knowledge AS jg_knowledge,
+            pd.picture AS jg_picture,
+            /* 填空题字段 */
+            tk.id AS gf_id,
+            tk.text AS gf_text,
+            tk.answer AS gf_answer,
+            tk.difficulty AS gf_difficulty,
+            tk.knowledge AS gf_knowledge,
+            tk.picture AS gf_picture,
+            tk.kong AS gf_kong,
+            /* 大题公共字段 */
+            COALESCE(jd.id, js.id, zhfx.id) AS bp_id,
+            COALESCE(jd.text, js.text, zhfx.text) AS bp_text,
+            COALESCE(jd.answer, js.answer, zhfx.answer) AS bp_answer,
+            COALESCE(jd.knowledge, js.knowledge, zhfx.knowledge) AS bp_knowledge,
+            COALESCE(jd.difficulty, js.difficulty, zhfx.difficulty) AS bp_difficulty,
+            COALESCE(jd.picture, js.picture, zhfx.picture) AS bp_picture,
+            zhfx.kong as bp_kong
+        FROM problems_uid p
+                 LEFT JOIN xuanzeti x ON p.type = 1 AND p.uid = x.uid
+                 LEFT JOIN tiankong tk ON p.type = 2 AND p.uid = tk.uid
+                 LEFT JOIN panduanti pd ON p.type = 3 AND p.uid = pd.uid
+                 LEFT JOIN jiandati jd ON p.type = 4 AND p.uid = jd.uid
+                 LEFT JOIN jisuanti js ON p.type = 5 AND p.uid = js.uid
+                 LEFT JOIN zonghefenxiti zhfx ON p.type = 6 AND p.uid = zhfx.uid
+        WHERE p.uid = #{uid}
+    </select>
+    
+    
     <select id="getChapter" resultType="java.lang.String">
         SELECT jvalue FROM json where jkey = 'catalogue'
     </select>
-    <select id="getByKlgInXuanzeti" resultType="com.bydbishe.vo.ChapterVo" parameterType="java.lang.String">
-        select uid,null as answered from xuanzeti
-        where knowledge like concat('%',#{id},'%')
+
+
+    
+    <select id="getByKlg" resultType="com.bydbishe.vo.ChapterVo" parameterType="java.lang.String">
+        select uid from xuanzeti where knowledge like concat('%',#{id},'%')
+        union all
+        select uid from jiandati where knowledge like concat('%',#{id},'%')
+        union all
+        select uid from jisuanti where knowledge like concat('%',#{id},'%')
+        union all
+        select uid from panduanti where knowledge like concat('%',#{id},'%')
+        union all
+        select uid from tiankong where knowledge like concat('%',#{id},'%')
+        union all
+        select uid from zonghefenxiti where knowledge like concat('%',#{id},'%')
         order by uid
     </select>
-
-    <select id="getProblemByUid" resultType="com.bydbishe.entity.SingleChoice" parameterType="java.lang.Integer">
-        select id, text, difficulty from xuanzeti where uid = #{uid}
+    
+    <select id="getPreprob" resultMap="baseProblemMap">
+        SELECT
+        p.uid,
+        p.type,
+        /* 选择题字段 */
+        x.id AS sc_id,
+        x.text AS sc_text,
+        x.difficulty AS sc_difficulty,
+        x.answer AS sc_answer,
+        x.knowledge AS sc_knowledge,
+        x.picture AS sc_picture,
+        /* 判断题字段 */
+        pd.id AS jg_id,
+        pd.text AS jg_text,
+        pd.answer AS jg_answer,
+        pd.difficulty AS jg_difficulty,
+        pd.knowledge AS jg_knowledge,
+        pd.picture AS jg_picture,
+        /* 填空题字段 */
+        tk.id AS gf_id,
+        tk.text AS gf_text,
+        tk.answer AS gf_answer,
+        tk.difficulty AS gf_difficulty,
+        tk.knowledge AS gf_knowledge,
+        tk.picture AS gf_picture,
+        tk.kong AS gf_kong,
+        /* 大题公共字段 */
+        COALESCE(jd.id, js.id, zhfx.id) AS bp_id,
+        COALESCE(jd.text, js.text, zhfx.text) AS bp_text,
+        COALESCE(jd.answer, js.answer, zhfx.answer) AS bp_answer,
+        COALESCE(jd.knowledge, js.knowledge, zhfx.knowledge) AS bp_knowledge,
+        COALESCE(jd.difficulty, js.difficulty, zhfx.difficulty) AS bp_difficulty,
+        COALESCE(jd.picture, js.picture, zhfx.picture) AS bp_picture,
+        zhfx.kong as bp_kong
+        FROM problems_uid p
+        LEFT JOIN xuanzeti x ON p.type = 1 AND p.uid = x.uid
+        LEFT JOIN tiankong tk ON p.type = 2 AND p.uid = tk.uid
+        LEFT JOIN panduanti pd ON p.type = 3 AND p.uid = pd.uid
+        LEFT JOIN jiandati jd ON p.type = 4 AND p.uid = jd.uid
+        LEFT JOIN jisuanti js ON p.type = 5 AND p.uid = js.uid
+        LEFT JOIN zonghefenxiti zhfx ON p.type = 6 AND p.uid = zhfx.uid
+        where p.uid &lt; #{uid}
+        and (
+        x.knowledge like concat('%', #{chapter} ,'%') or
+        pd.knowledge like concat('%', #{chapter} ,'%') or
+        tk.knowledge like concat('%', #{chapter} ,'%') or
+        jd.knowledge like concat('%', #{chapter} ,'%') or
+        js.knowledge like concat('%', #{chapter} ,'%') or
+        zhfx.knowledge like concat('%', #{chapter} ,'%')
+        )
+        order by p.uid desc
+        limit 0,1
     </select>
+
+    <select id="getNextprob" resultMap="baseProblemMap">
+        SELECT
+            p.uid,
+            p.type,
+            /* 选择题字段 */
+            x.id AS sc_id,
+            x.text AS sc_text,
+            x.difficulty AS sc_difficulty,
+            x.answer AS sc_answer,
+            x.knowledge AS sc_knowledge,
+            x.picture AS sc_picture,
+            /* 判断题字段 */
+            pd.id AS jg_id,
+            pd.text AS jg_text,
+            pd.answer AS jg_answer,
+            pd.difficulty AS jg_difficulty,
+            pd.knowledge AS jg_knowledge,
+            pd.picture AS jg_picture,
+            /* 填空题字段 */
+            tk.id AS gf_id,
+            tk.text AS gf_text,
+            tk.answer AS gf_answer,
+            tk.difficulty AS gf_difficulty,
+            tk.knowledge AS gf_knowledge,
+            tk.picture AS gf_picture,
+            tk.kong AS gf_kong,
+            /* 大题公共字段 */
+            COALESCE(jd.id, js.id, zhfx.id) AS bp_id,
+            COALESCE(jd.text, js.text, zhfx.text) AS bp_text,
+            COALESCE(jd.answer, js.answer, zhfx.answer) AS bp_answer,
+            COALESCE(jd.knowledge, js.knowledge, zhfx.knowledge) AS bp_knowledge,
+            COALESCE(jd.difficulty, js.difficulty, zhfx.difficulty) AS bp_difficulty,
+            COALESCE(jd.picture, js.picture, zhfx.picture) AS bp_picture,
+            zhfx.kong as bp_kong
+        FROM problems_uid p
+                 LEFT JOIN xuanzeti x ON p.type = 1 AND p.uid = x.uid
+                 LEFT JOIN tiankong tk ON p.type = 2 AND p.uid = tk.uid
+                 LEFT JOIN panduanti pd ON p.type = 3 AND p.uid = pd.uid
+                 LEFT JOIN jiandati jd ON p.type = 4 AND p.uid = jd.uid
+                 LEFT JOIN jisuanti js ON p.type = 5 AND p.uid = js.uid
+                 LEFT JOIN zonghefenxiti zhfx ON p.type = 6 AND p.uid = zhfx.uid
+        where p.uid &gt; #{uid}
+          and (
+            x.knowledge like concat('%', #{chapter} ,'%') or
+            pd.knowledge like concat('%', #{chapter} ,'%') or
+            tk.knowledge like concat('%', #{chapter} ,'%') or
+            jd.knowledge like concat('%', #{chapter} ,'%') or
+            js.knowledge like concat('%', #{chapter} ,'%') or
+            zhfx.knowledge like concat('%', #{chapter} ,'%')
+            )
+        order by p.uid
+            limit 0,1
+    </select>
+    
 </mapper>
+

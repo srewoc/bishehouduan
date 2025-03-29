@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class JWT {
     
-    private final static long timelimit = 1;
+    private final static long timelimit = 1000 * 60 * 60 * 24 * 7;
     private final static String  signature = "login";
     
     public static String jwtBuilde(Integer uid){

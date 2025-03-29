@@ -28,6 +28,10 @@ public class JWTFilter extends OncePerRequestFilter {
                 }
             }
         }
+        if(request.getRequestURI().equals("/login")){
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (token != null) {
             Claims claims = JWT.parse(token);
             if(new Date().after(claims.getExpiration())){
