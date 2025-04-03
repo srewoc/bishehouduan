@@ -29,9 +29,7 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public PageResult getPage(PageDTO pageDTO) {
         PageHelper.startPage(pageDTO.getPage(), pageDTO.getPagesize());
-        Page<ProblemManageVo> page = manageMapper.getPage(pageDTO);
-        long total = page.getTotal();
         List<ProblemManageVo> records = manageMapper.getPage(pageDTO);
-        return new PageResult(total, records);
+        return new PageResult(records.size(), records);
     }
 }
