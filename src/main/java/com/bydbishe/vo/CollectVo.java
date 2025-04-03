@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChapterVo implements Serializable {
+public class CollectVo implements Serializable {
     private Integer uid;
-    private Integer answered;
+    private String knowledge;
 }

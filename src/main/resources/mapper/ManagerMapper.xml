@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bydbishe.mapper.ManageMapper">
+
+    <resultMap id="ProblemManageVoMap" type="com.bydbishe.vo.ProblemManageVo">
+        <result column="type" property="type"/>
+        <result column="uid" property="uid"/>
+        <result column="text" property="text"/>
+        <result column="answer" property="answer"/>
+        <result column="knowledge" property="knowledge"/>
+        <result column="difficulty" property="difficulty"/>
+        <result column="picture" property="picture"/>
+        <result column="anspicture" property="anspicture"/>
+        <result column="kong" property="kong"/>
+    </resultMap>
+    
+    <insert id="newProblem" parameterType="com.bydbishe.dto.NewProblemDTO">
+        <!-- 先插入problems_uid表生成UID -->
+        <selectKey keyProperty="uid" resultType="int" order="BEFORE">
+            INSERT INTO problems_uid (type) VALUES (#{type});
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        <!-- 根据题型插入具体题目表 -->
+        <choose>
+            <!-- 选择题 -->
+            <when test="type == 1">
+                INSERT INTO xuanzeti (
+                text, answer, knowledge, difficulty, picture, uid
+                ) VALUES (
+                #{text}, #{answer}, #{knowledge}, #{difficulty}, #{picture}, #{uid}
+                )
+            </when>
+
+            <!-- 填空题 -->
+            <when test="type == 2">
+                INSERT INTO tiankong (
+                text, answer, knowledge, difficulty, picture, kong, uid
+                ) VALUES (
+                #{text}, #{answer}, #{knowledge}, #{difficulty}, #{picture}, #{kong}, #{uid}
+                )
+            </when>
+
+            <!-- 判断题 -->
+            <when test="type == 3">
+                INSERT INTO panduanti (
+                text, answer, knowledge, difficulty, uid, picture
+                ) VALUES (
+                #{text}, #{answer, jdbcType=INTEGER}, #{knowledge}, #{difficulty}, #{uid}, #{picture}
+                )
+            </when>
+
+            <!-- 简答题 -->
+            <when test="type == 4">
+                INSERT INTO jiandati (
+                text, answer, knowledge, difficulty, picture, uid
+                ) VALUES (
+                #{text}, #{answer}, #{knowledge}, #{difficulty}, #{picture}, #{uid}
+                )
+            </when>
+
+            <!-- 计算题 -->
+            <when test="type == 5">
+                INSERT INTO jisuanti (
+                text, answer, knowledge, difficulty, picture, uid
+                ) VALUES (
+                #{text}, #{answer}, #{knowledge}, #{difficulty}, #{picture}, #{uid}
+                )
+            </when>
+
+            <!-- 综合分析题 -->
+            <when test="type == 6">
+                INSERT INTO zonghefenxiti (
+                text, answer, knowledge, difficulty, picture, kong, uid
+                ) VALUES (
+                #{text}, #{answer}, #{knowledge}, #{difficulty}, #{picture}, #{kong}, #{uid}
+                )
+            </when>
+
+            
+        </choose>
+    </insert>
+
+    <select id="getPage" resultMap="ProblemManageVoMap">
+        select
+            1 as type,
+            uid,
+            text,
+            answer,
+            knowledge,
+            difficulty,
+            picture,
+            null as anspicture,
+            null as kong
+        from xuanzeti
+        order by uid
+    </select>
+    
+    
+<!--    <select id="getPage" resultMap="ProblemManageVoMap">-->
+<!--        SELECT * FROM (-->
+<!--        (SELECT-->
+<!--        1 as     type,-->
+<!--        xz.uid,-->
+<!--        xz.text,-->
+<!--        xz.answer,-->
+<!--        xz.knowledge,-->
+<!--        xz.difficulty,-->
+<!--        xz.picture,-->
+<!--        NULL as anspicture,-->
+<!--        NULL as kong-->
+<!--        FROM xuanzeti xz-->
+<!--        INNER JOIN problems_uid pu ON xz.uid = pu.uid-->
+<!--        <where>-->
+<!--            <if test="knowledge != null and knowledge != ''">-->
+<!--                AND xz.knowledge LIKE CONCAT('%', #{knowledge}, '%')-->
+<!--            </if>-->
+<!--            <if test="type != null and type == 1">-->
+<!--                AND pu.type = 1-->
+<!--            </if>-->
+<!--        </where>)-->
+
+<!--        UNION ALL-->
+
+<!--        (SELECT-->
+<!--        2 as type,-->
+<!--        tk.uid,-->
+<!--        tk.text,-->
+<!--        tk.answer,-->
+<!--        tk.knowledge,-->
+<!--        tk.difficulty,-->
+<!--        tk.picture,-->
+<!--        NULL as anspicture,-->
+<!--        tk.kong-->
+<!--        FROM tiankong tk-->
+<!--        INNER JOIN problems_uid pu ON tk.uid = pu.uid-->
+<!--        <where>-->
+<!--            <if test="knowledge != null and knowledge != ''">-->
+<!--                AND tk.knowledge LIKE CONCAT('%', #{knowledge}, '%')-->
+<!--            </if>-->
+<!--            <if test="type != null and type == 2">-->
+<!--                AND pu.type = 2-->
+<!--            </if>-->
+<!--        </where>)-->
+
+<!--        UNION ALL-->
+
+<!--        (SELECT-->
+<!--        3 as type,-->
+<!--        pd.uid,-->
+<!--        pd.text,-->
+<!--        CAST(pd.answer AS CHAR) as answer,-->
+<!--        pd.knowledge,-->
+<!--        pd.difficulty,-->
+<!--        pd.picture,-->
+<!--        NULL as anspicture,-->
+<!--        NULL as kong-->
+<!--        FROM panduanti pd-->
+<!--        INNER JOIN problems_uid pu ON pd.uid = pu.uid-->
+<!--        <where>-->
+<!--            <if test="knowledge != null and knowledge != ''">-->
+<!--                AND pd.knowledge LIKE CONCAT('%', #{knowledge}, '%')-->
+<!--            </if>-->
+<!--            <if test="type != null and type == 3">-->
+<!--                AND pu.type = 3-->
+<!--            </if>-->
+<!--        </where>)-->
+
+<!--        UNION ALL-->
+
+<!--        (SELECT-->
+<!--        4 as type,-->
+<!--        jd.uid,-->
+<!--        jd.text,-->
+<!--        jd.answer,-->
+<!--        jd.knowledge,-->
+<!--        jd.difficulty,-->
+<!--        jd.picture,-->
+<!--        NULL as anspicture,-->
+<!--        NULL as kong-->
+<!--        FROM jiandati jd-->
+<!--        INNER JOIN problems_uid pu ON jd.uid = pu.uid-->
+<!--        <where>-->
+<!--            <if test="knowledge != null and knowledge != ''">-->
+<!--                AND jd.knowledge LIKE CONCAT('%', #{knowledge}, '%')-->
+<!--            </if>-->
+<!--            <if test="type != null and type == 4">-->
+<!--                AND pu.type = 4-->
+<!--            </if>-->
+<!--        </where>)-->
+
+<!--        UNION ALL-->
+
+<!--        (SELECT-->
+<!--        5 as type,-->
+<!--        jst.uid,-->
+<!--        jst.text,-->
+<!--        jst.answer,-->
+<!--        jst.knowledge,-->
+<!--        jst.difficulty,-->
+<!--        jst.picture,-->
+<!--        NULL as anspicture,-->
+<!--        NULL as kong-->
+<!--        FROM jisuanti jst-->
+<!--        INNER JOIN problems_uid pu ON jst.uid = pu.uid-->
+<!--        <where>-->
+<!--            <if test="knowledge != null and knowledge != ''">-->
+<!--                AND jst.knowledge LIKE CONCAT('%', #{knowledge}, '%')-->
+<!--            </if>-->
+<!--            <if test="type != null and type == 5">-->
+<!--                AND pu.type = 5-->
+<!--            </if>-->
+<!--        </where>)-->
+
+<!--        UNION ALL-->
+
+<!--        (SELECT-->
+<!--        6 as type,-->
+<!--        zh.uid,-->
+<!--        zh.text,-->
+<!--        zh.answer,-->
+<!--        zh.knowledge,-->
+<!--        zh.difficulty,-->
+<!--        zh.picture,-->
+<!--        NULL as anspicture,-->
+<!--        zh.kong-->
+<!--        FROM zonghefenxiti zh-->
+<!--        INNER JOIN problems_uid pu ON zh.uid = pu.uid-->
+<!--        <where>-->
+<!--            <if test="knowledge != null and knowledge != ''">-->
+<!--                AND zh.knowledge LIKE CONCAT('%', #{knowledge}, '%')-->
+<!--            </if>-->
+<!--            <if test="type != null and type == 6">-->
+<!--                AND pu.type = 6-->
+<!--            </if>-->
+<!--        </where>)-->
+<!--        ) AS combined_result-->
+<!--        ORDER BY uid-->
+<!--    </select>-->
+</mapper>

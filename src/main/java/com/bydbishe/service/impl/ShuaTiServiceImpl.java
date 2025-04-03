@@ -1,9 +1,6 @@
 package com.bydbishe.service.impl;
 
-import com.bydbishe.dto.BigProblemSubmitDTO;
-import com.bydbishe.dto.GapFillingSubmitDTO;
-import com.bydbishe.dto.JudgeSubmitDTO;
-import com.bydbishe.dto.SingleChoiceSubmitDTO;
+import com.bydbishe.dto.*;
 import com.bydbishe.entity.BigProblem;
 import com.bydbishe.entity.GapFilling;
 import com.bydbishe.entity.Judge;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @Service
@@ -32,27 +28,48 @@ public class ShuaTiServiceImpl implements ShuaTiService {
     }
 
     @Override
-    public List<ChapterVo> getChapterByKlg(String id) {
-        List<ChapterVo> list = shuaTiMapper.getByKlg(id);
+    public List<ChapterVo> getChapterByKlg(String id, Integer useruid) {
+        List<ChapterVo> list = shuaTiMapper.getByKlg(id, useruid);
         return new ArrayList<ChapterVo>(list);
     }
 
     @Override
-    public ProblemVo getProblemByUid(Integer uid) {
+    public ProblemVo getProblemByUid(Integer uid, Integer useruid) {
         Object problem = shuaTiMapper.getProblemByUid(uid);
-        return classTransition(problem);
+        return classTransition(problem, useruid);
     }
 
     @Override
-    public ProblemVo preprob(String chapter, Integer uid) {
+    public ProblemVo preprob(String chapter, Integer uid, Integer useruid) {
         Object problem = shuaTiMapper.getPreprob(chapter, uid);
-        return classTransition(problem);
+        if(problem == null){
+            return null;
+        }
+        return classTransition(problem,  useruid);
     }
 
     @Override
-    public ProblemVo nextprob(String chapter, Integer uid) {
+    public ProblemVo nextprob(String chapter, Integer uid, Integer useruid) {
         Object problem = shuaTiMapper.getNextprob(chapter, uid);
-        return classTransition(problem);
+        if(problem == null){
+            return null;
+        }
+        return classTransition(problem, useruid);
+    }
+
+    @Override
+    public void record(RecordDTO recordDTO, Integer useruid) {
+        shuaTiMapper.record(recordDTO.getProblemuid(), recordDTO.getFlag(), useruid);
+    }
+
+    @Override
+    public void setcollect(Integer useruid, Integer problemuid, Boolean status) {
+        shuaTiMapper.setcollect(useruid, problemuid, status);
+    }
+
+    @Override
+    public List<CollectVo> getCollect(Integer useruid) {
+        return shuaTiMapper.getCollect(useruid);
     }
 
     @Override
@@ -100,9 +117,7 @@ public class ShuaTiServiceImpl implements ShuaTiService {
         return new BigProblemSubmitVo(bigProblem.getAnswer());
     }
 
-
-
-    private ProblemVo classTransition(Object problem) {
+    private ProblemVo classTransition(Object problem, Integer useruid) {
         if (problem instanceof SingleChoice singleChoice) {
             // TODO 后续可能要改切片方式
             String[] text = singleChoice.getText().split("\n");
@@ -115,32 +130,41 @@ public class ShuaTiServiceImpl implements ShuaTiService {
                                     .OPD(text[4])
                                     .diff(singleChoice.getDifficulty())
                                     .picture(singleChoice.getPicture())
+                                    .uid(singleChoice.getUid())
                                     .build()
                     )
                     .type(singleChoice.getType())
+                    .isFavorite(shuaTiMapper.getisFavorite(singleChoice.getUid(), useruid))
                     .build();
-        } else if (problem instanceof GapFilling gapFilling) {
+        } 
+        else if (problem instanceof GapFilling gapFilling) {
             return ProblemVo.builder().data(
                             GapfillingVo.builder()
                                     .title(gapFilling.getText())
                                     .diff(gapFilling.getDifficulty())
                                     .gapcnt(gapFilling.getKong())
                                     .picture(gapFilling.getPicture())
+                                    .uid(gapFilling.getUid())
                                     .build()
                     )
                     .type(gapFilling.getType())
+                    .isFavorite(shuaTiMapper.getisFavorite(gapFilling.getUid(), useruid))
                     .build();
-        } else if (problem instanceof Judge judge) {
+        } 
+        else if (problem instanceof Judge judge) {
             return ProblemVo.builder().data(
                             JudgeVo.builder()
                                     .title(judge.getText())
                                     .picture(judge.getPicture())
                                     .diff(judge.getDifficulty())
+                                    .uid(judge.getUid())
                                     .build()
                     )
                     .type(judge.getType())
+                    .isFavorite(shuaTiMapper.getisFavorite(judge.getUid(), useruid))
                     .build();
-        } else {
+        } 
+        else {
             BigProblem bigProblem = (BigProblem) problem;
             return ProblemVo.builder().data(
                             BigProblemVo.builder()
@@ -148,12 +172,15 @@ public class ShuaTiServiceImpl implements ShuaTiService {
                                     .picture(bigProblem.getPicture())
                                     .diff(bigProblem.getDifficulty())
                                     .gapcnt(bigProblem.getKong())
+                                    .uid(bigProblem.getUid())
                                     .build()
                     )
                     .type(bigProblem.getType())
+                    .isFavorite(shuaTiMapper.getisFavorite(bigProblem.getUid(), useruid))
                     .build();
         }
     }
-
+    
+    
 
 }

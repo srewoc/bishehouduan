@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChapterVo implements Serializable {
-    private Integer uid;
-    private Integer answered;
+public class ProblemChartVo implements Serializable {
+    private Integer solved;
+    private Integer wrong;
+    private Integer notry;
 }

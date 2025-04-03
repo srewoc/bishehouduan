@@ -14,4 +14,5 @@ import java.io.Serializable;
 public class ProblemVo implements Serializable {
     private Object data;
     private Integer type;
+    private Boolean isFavorite;
 }

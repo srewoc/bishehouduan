@@ -15,4 +15,5 @@ public class JudgeVo implements Serializable {
     private String title;
     private String picture;
     private String diff;
+    private Integer uid;
 }

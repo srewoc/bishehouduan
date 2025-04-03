@@ -1,4 +1,4 @@
-package com.bydbishe.vo;
+package com.bydbishe.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChapterVo implements Serializable {
-    private Integer uid;
-    private Integer answered;
+public class PageResult implements Serializable {
+    private long total;
+    private List records;
 }

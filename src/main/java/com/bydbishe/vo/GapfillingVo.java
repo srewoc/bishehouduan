@@ -16,4 +16,5 @@ public class GapfillingVo implements Serializable {
     private String diff;
     private Integer gapcnt;
     private String picture;
+    private Integer uid;
 }

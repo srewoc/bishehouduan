@@ -92,81 +92,60 @@
                  LEFT JOIN zonghefenxiti zhfx ON p.type = 6 AND p.uid = zhfx.uid
         WHERE p.uid = #{uid}
     </select>
-    
-    
-    <select id="getChapter" resultType="java.lang.String">
-        SELECT jvalue FROM json where jkey = 'catalogue'
-    </select>
 
 
-    
-    <select id="getByKlg" resultType="com.bydbishe.vo.ChapterVo" parameterType="java.lang.String">
-        select uid from xuanzeti where knowledge like concat('%',#{id},'%')
-        union all
-        select uid from jiandati where knowledge like concat('%',#{id},'%')
-        union all
-        select uid from jisuanti where knowledge like concat('%',#{id},'%')
-        union all
-        select uid from panduanti where knowledge like concat('%',#{id},'%')
-        union all
-        select uid from tiankong where knowledge like concat('%',#{id},'%')
-        union all
-        select uid from zonghefenxiti where knowledge like concat('%',#{id},'%')
-        order by uid
-    </select>
-    
     <select id="getPreprob" resultMap="baseProblemMap">
         SELECT
-        p.uid,
-        p.type,
-        /* 选择题字段 */
-        x.id AS sc_id,
-        x.text AS sc_text,
-        x.difficulty AS sc_difficulty,
-        x.answer AS sc_answer,
-        x.knowledge AS sc_knowledge,
-        x.picture AS sc_picture,
-        /* 判断题字段 */
-        pd.id AS jg_id,
-        pd.text AS jg_text,
-        pd.answer AS jg_answer,
-        pd.difficulty AS jg_difficulty,
-        pd.knowledge AS jg_knowledge,
-        pd.picture AS jg_picture,
-        /* 填空题字段 */
-        tk.id AS gf_id,
-        tk.text AS gf_text,
-        tk.answer AS gf_answer,
-        tk.difficulty AS gf_difficulty,
-        tk.knowledge AS gf_knowledge,
-        tk.picture AS gf_picture,
-        tk.kong AS gf_kong,
-        /* 大题公共字段 */
-        COALESCE(jd.id, js.id, zhfx.id) AS bp_id,
-        COALESCE(jd.text, js.text, zhfx.text) AS bp_text,
-        COALESCE(jd.answer, js.answer, zhfx.answer) AS bp_answer,
-        COALESCE(jd.knowledge, js.knowledge, zhfx.knowledge) AS bp_knowledge,
-        COALESCE(jd.difficulty, js.difficulty, zhfx.difficulty) AS bp_difficulty,
-        COALESCE(jd.picture, js.picture, zhfx.picture) AS bp_picture,
-        zhfx.kong as bp_kong
+            p.uid,
+            p.type,
+            /* 选择题字段 */
+            x.id AS sc_id,
+            x.text AS sc_text,
+            x.difficulty AS sc_difficulty,
+            x.answer AS sc_answer,
+            x.knowledge AS sc_knowledge,
+            x.picture AS sc_picture,
+            /* 判断题字段 */
+            pd.id AS jg_id,
+            pd.text AS jg_text,
+            pd.answer AS jg_answer,
+            pd.difficulty AS jg_difficulty,
+            pd.knowledge AS jg_knowledge,
+            pd.picture AS jg_picture,
+            /* 填空题字段 */
+            tk.id AS gf_id,
+            tk.text AS gf_text,
+            tk.answer AS gf_answer,
+            tk.difficulty AS gf_difficulty,
+            tk.knowledge AS gf_knowledge,
+            tk.picture AS gf_picture,
+            tk.kong AS gf_kong,
+            /* 大题公共字段 */
+            COALESCE(jd.id, js.id, zhfx.id) AS bp_id,
+            COALESCE(jd.text, js.text, zhfx.text) AS bp_text,
+            COALESCE(jd.answer, js.answer, zhfx.answer) AS bp_answer,
+            COALESCE(jd.knowledge, js.knowledge, zhfx.knowledge) AS bp_knowledge,
+            COALESCE(jd.difficulty, js.difficulty, zhfx.difficulty) AS bp_difficulty,
+            COALESCE(jd.picture, js.picture, zhfx.picture) AS bp_picture,
+            zhfx.kong as bp_kong
         FROM problems_uid p
-        LEFT JOIN xuanzeti x ON p.type = 1 AND p.uid = x.uid
-        LEFT JOIN tiankong tk ON p.type = 2 AND p.uid = tk.uid
-        LEFT JOIN panduanti pd ON p.type = 3 AND p.uid = pd.uid
-        LEFT JOIN jiandati jd ON p.type = 4 AND p.uid = jd.uid
-        LEFT JOIN jisuanti js ON p.type = 5 AND p.uid = js.uid
-        LEFT JOIN zonghefenxiti zhfx ON p.type = 6 AND p.uid = zhfx.uid
+                 LEFT JOIN xuanzeti x ON p.type = 1 AND p.uid = x.uid
+                 LEFT JOIN tiankong tk ON p.type = 2 AND p.uid = tk.uid
+                 LEFT JOIN panduanti pd ON p.type = 3 AND p.uid = pd.uid
+                 LEFT JOIN jiandati jd ON p.type = 4 AND p.uid = jd.uid
+                 LEFT JOIN jisuanti js ON p.type = 5 AND p.uid = js.uid
+                 LEFT JOIN zonghefenxiti zhfx ON p.type = 6 AND p.uid = zhfx.uid
         where p.uid &lt; #{uid}
-        and (
-        x.knowledge like concat('%', #{chapter} ,'%') or
-        pd.knowledge like concat('%', #{chapter} ,'%') or
-        tk.knowledge like concat('%', #{chapter} ,'%') or
-        jd.knowledge like concat('%', #{chapter} ,'%') or
-        js.knowledge like concat('%', #{chapter} ,'%') or
-        zhfx.knowledge like concat('%', #{chapter} ,'%')
-        )
+          and (
+            x.knowledge like concat('%', #{chapter} ,'%') or
+            pd.knowledge like concat('%', #{chapter} ,'%') or
+            tk.knowledge like concat('%', #{chapter} ,'%') or
+            jd.knowledge like concat('%', #{chapter} ,'%') or
+            js.knowledge like concat('%', #{chapter} ,'%') or
+            zhfx.knowledge like concat('%', #{chapter} ,'%')
+            )
         order by p.uid desc
-        limit 0,1
+            limit 0,1
     </select>
 
     <select id="getNextprob" resultMap="baseProblemMap">
@@ -222,6 +201,126 @@
         order by p.uid
             limit 0,1
     </select>
+
+
+    <select id="getChapter" resultType="java.lang.String">
+        SELECT jvalue FROM json where jkey = 'catalogue'
+    </select>
+
+
     
+    <select id="getByKlg" resultType="com.bydbishe.vo.ChapterVo">
+        SELECT
+            temp.uid,
+            CASE
+                WHEN pr.problem_uid IS NULL THEN NULL
+                ELSE CASE
+                         WHEN pr.true_times > 0 THEN 1
+                         ELSE 0
+                    END
+                END AS answered
+        FROM (
+                 SELECT uid FROM xuanzeti WHERE knowledge LIKE CONCAT('%',#{id},'%')
+                 UNION ALL
+                 SELECT uid FROM jiandati WHERE knowledge LIKE CONCAT('%',#{id},'%')
+                 UNION ALL
+                 SELECT uid FROM jisuanti WHERE knowledge LIKE CONCAT('%',#{id},'%')
+                 UNION ALL
+                 SELECT uid FROM panduanti WHERE knowledge LIKE CONCAT('%',#{id},'%')
+                 UNION ALL
+                 SELECT uid FROM tiankong WHERE knowledge LIKE CONCAT('%',#{id},'%')
+                 UNION ALL
+                 SELECT uid FROM zonghefenxiti WHERE knowledge LIKE CONCAT('%',#{id},'%')
+             ) AS temp
+                 LEFT JOIN problems_record pr
+                           ON pr.problem_uid = temp.uid
+                               AND pr.user_uid = #{useruid}
+        ORDER BY temp.uid;
+    </select>
+    
+    <insert id="record">
+        INSERT INTO problems_record (problem_uid, user_uid, recent_status, true_times, false_times)
+        VALUES (#{problemuid}, #{useruid}, #{flag},
+        <choose>
+            <when test="flag == 0">0</when>
+            <otherwise>1</otherwise>
+        </choose>
+        ,
+        <choose>
+            <when test="flag == 0">1</when>
+            <otherwise>0</otherwise>
+        </choose>
+        )
+        ON DUPLICATE KEY UPDATE
+        recent_status = #{flag},
+        true_times = true_times +
+        <choose>
+            <when test="flag == 0">0</when>
+            <otherwise>1</otherwise>
+        </choose>
+        ,
+        false_times = false_times +
+        <choose>
+            <when test="flag == 0">1</when>
+            <otherwise>0</otherwise>
+        </choose>
+    </insert>
+
+    <select id="getisFavorite" resultType="boolean">
+        SELECT EXISTS(
+            SELECT 1
+            FROM collect
+            WHERE problem_uid = #{problemuid}
+              AND user_uid = #{useruid}
+        )
+    </select>
+
+    <update id="setcollect">
+        <choose>
+            <!-- 插入逻辑 -->
+            <when test="status">
+                INSERT INTO collect (user_uid, problem_uid) VALUES (#{useruid}, #{problemuid})
+            </when>
+            <!-- 删除逻辑 -->
+            <otherwise>
+                DELETE FROM collect
+                WHERE user_uid = #{useruid}
+                AND problem_uid = #{problemuid}
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="getCollect" resultType="com.bydbishe.vo.CollectVo">
+        SELECT c.problem_uid AS uid, x.knowledge
+        FROM collect c
+                 INNER JOIN xuanzeti x ON c.problem_uid = x.uid
+        WHERE c.user_uid = #{useruid}
+        UNION ALL
+        SELECT c.problem_uid, t.knowledge
+        FROM collect c
+                 INNER JOIN tiankong t ON c.problem_uid = t.uid
+        WHERE c.user_uid = #{useruid}
+        UNION ALL
+        SELECT c.problem_uid, p.knowledge
+        FROM collect c
+                 INNER JOIN panduanti p ON c.problem_uid = p.uid
+        WHERE c.user_uid = #{useruid}
+        UNION ALL
+        SELECT c.problem_uid, j.knowledge
+        FROM collect c
+                 INNER JOIN jiandati j ON c.problem_uid = j.uid
+        WHERE c.user_uid = #{useruid}
+        UNION ALL
+        SELECT c.problem_uid, js.knowledge
+        FROM collect c
+                 INNER JOIN jisuanti js ON c.problem_uid = js.uid
+        WHERE c.user_uid = #{useruid}
+        UNION ALL
+        SELECT c.problem_uid, z.knowledge
+        FROM collect c
+                 INNER JOIN zonghefenxiti z ON c.problem_uid = z.uid
+        WHERE c.user_uid = #{useruid}
+        order by uid 
+    </select>
 </mapper>
 

@@ -19,4 +19,5 @@ public class SingleChoiceVo implements Serializable {
     private String OPD;
     private String diff;
     private String picture;
+    private Integer uid;
 }

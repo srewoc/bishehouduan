@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bydbishe.mapper.UserMapper">
+    <select id="changePassword">
+        update cuser set password=#{password} where uid=#{useruid}
+    </select>
+
+    <select id="chart" resultType="com.bydbishe.vo.ProblemChartVo">
+        SELECT
+            a.solved AS solved,
+            a.wrong AS wrong,
+            (b.total - (a.solved + a.wrong)) AS notry
+        FROM
+            (SELECT
+                 COUNT(DISTINCT CASE WHEN true_times > 0 THEN problem_uid END) AS solved,
+                 COUNT(DISTINCT CASE WHEN true_times = 0 THEN problem_uid END) AS wrong
+             FROM problems_record
+             WHERE user_uid = #{useruid}) a,
+            (SELECT COUNT(*) AS total FROM problems_uid) b
+    </select>
+</mapper>

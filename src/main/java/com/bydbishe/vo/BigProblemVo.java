@@ -16,4 +16,5 @@ public class BigProblemVo implements Serializable {
     private String picture;
     private String diff;
     private Integer gapcnt;
+    private Integer uid;
 }
